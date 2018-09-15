@@ -1,15 +1,15 @@
-// Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
+package VacuumCleaner;// Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
 // Class: CS4242 - Artificial Intelligence
 // Assignment: Programming Assignment 1
 // Date: 15 September 2018
 import java.util.Random;
-// Environment class
+// VacuumCleaner.Environment class
 // This class is designed to define a new set of bounds, which will determine
 // the world in which the vacuum is capable of operating
 public class Environment
 {
-    private int verticalCount;
-    //private int horizontalCount;
+    private int horizontalCount;
+    //private int verticalCount;
     //private Square rooms[];
     private Random rand = new Random();
 
@@ -28,7 +28,7 @@ public class Environment
         PopulateEnvironment();
     }
 
-    public Environment(Square array[])
+    /*public Environment(Square array[])
     {
         if (inputList.length > 0)
         {
@@ -36,16 +36,16 @@ public class Environment
             horizontalCount = array.length;
             //verticalCount = array[0].length;
         }
-    }
+    }*/
 
-    // Populate Environment Method
+    // Populate VacuumCleaner.Environment Method
     // <Description> This method creates the layout of the environment,
     // by placing two equal-sized areas next to each other, each
     // equaling half of the total area of the environment. </Description>
     // <Parameters> None </Parameters>
     private void PopulateEnvironment()
     {
-        rooms = new Square[horizontalCount];
+        //rooms = new Square[horizontalCount];
         InitializeRooms();
     }
 
@@ -60,7 +60,7 @@ public class Environment
         // Set for only two rooms currently
         for (int i = 0; i < 2; i++)
         {
-            Square s = new Square();
+            /*Square s = new Square();
             s.up = false;
             s.down = false;
             // Looking at left room
@@ -76,7 +76,8 @@ public class Environment
                 s.rght = true;
             }
             // Assign room a dirtiness value
-            s.isDirty = GetRoomCondition();
+            s.isDirty = GetRoomCondition();*/
+            Boolean temp = GetRoomCondition();
         }
     }
 
