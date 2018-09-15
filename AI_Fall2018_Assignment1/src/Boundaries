@@ -1,0 +1,17 @@
+// Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
+// Class: CS4242 - Artificial Intelligence
+// Assignment: Programming Assignment 1
+// Date: 15 September 2018
+
+// Boundaries class
+// This class is designed to define a new set of bounds, which will determine
+// the world in which the vaccuum is capable of operating
+public class Boundaries
+{
+    public int height;
+    public int width;
+
+    // Boundaries Constructor
+    // <Parameters> The Boundaries class takes two parameters, which are used to
+    // define the height and width of the environment. </Parameters>
+}
