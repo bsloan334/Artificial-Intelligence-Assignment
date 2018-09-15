@@ -10,7 +10,7 @@ public class Environment
 {
     private int horizontalCount;
     //private int verticalCount;
-    //private Square rooms[];
+    //private VacuumCleaner.Square rooms[];
     private Random rand = new Random();
 
     // Boundaries Constructor
@@ -28,7 +28,7 @@ public class Environment
         PopulateEnvironment();
     }
 
-    /*public Environment(Square array[])
+    /*public Environment(VacuumCleaner.Square array[])
     {
         if (inputList.length > 0)
         {
@@ -45,7 +45,7 @@ public class Environment
     // <Parameters> None </Parameters>
     private void PopulateEnvironment()
     {
-        //rooms = new Square[horizontalCount];
+        //rooms = new VacuumCleaner.Square[horizontalCount];
         InitializeRooms();
     }
 
@@ -56,11 +56,11 @@ public class Environment
     // <Parameters> None </Parameters>
     private void InitializeRooms()
     {
-        // Iterate over rooms to create new Square object
+        // Iterate over rooms to create new VacuumCleaner.Square object
         // Set for only two rooms currently
         for (int i = 0; i < 2; i++)
         {
-            /*Square s = new Square();
+            /*VacuumCleaner.Square s = new VacuumCleaner.Square();
             s.up = false;
             s.down = false;
             // Looking at left room
