@@ -9,32 +9,20 @@ import java.util.Random;
 public class Environment
 {
     private int horizontalCount;
-    //private int verticalCount;
-    private Square rooms[];
+    private int verticalCount;
+    private Square rooms[][];
     private Vacuum vacuum = new Vacuum();
     private Random rand = new Random();
 
     // Boundaries Constructor
     // <Parameters> The Boundaries class takes two parameters, which are used to
     // define the height and width of the environment. </Parameters>
-    public Environment(int x)
-    {
-        if (x > 0)
-        {
+    public Environment(int x, int y) {
+        if (x > 0) {
             horizontalCount = x;
-            //verticalCount = y;
+            verticalCount = y;
         }
     }
-
-    /*public Environment(VacuumCleaner.Square array[])
-    {
-        if (inputList.length > 0)
-        {
-            rooms = array;
-            horizontalCount = array.length;
-            //verticalCount = array[0].length;
-        }
-    }*/
 
     public void Run()
     {
@@ -42,9 +30,11 @@ public class Environment
         // Fill the environment with rooms and assign a dirty or clean value
         PopulateEnvironment();
 
+        Square startingRoom = rooms[0][0];
         // Place vacuum in the first room
         System.out.println("Placing vacuum in first room...");
-        vacuum.room = rooms[0];
+        vacuum.room = startingRoom;
+        vacuum.visitedRooms.add(startingRoom);
 
         // Try to clean the initial room
         System.out.println("Start cleaning!");
@@ -72,7 +62,7 @@ public class Environment
     private void PopulateEnvironment()
     {
         System.out.println("Adding new rooms to environment!");
-        rooms = new VacuumCleaner.Square[horizontalCount];
+        rooms = new VacuumCleaner.Square[horizontalCount][verticalCount];
         InitializeRooms();
     }
 
@@ -87,35 +77,52 @@ public class Environment
         // Set for only two rooms currently
         if(rooms.length > 1) {
             for (int i = 0; i < rooms.length; i++) {
-                Square currentRoom = new Square();
-                System.out.println("Room " + i + " created!");
-                rooms[i] = currentRoom;
+                for(int j = 0; j < rooms[0].length; j++) {
+                    Square currentRoom = new Square();
+                    System.out.println("Room at position (" + i + ", " + j + ") created!");
+                    rooms[i][j] = currentRoom;
 
-                // If not in the corner room, set current and previous square accordingly
-                if(i > 0) {
-                    SetLeftRight(i);
+                    // If not in the corner room, set current and previous square accordingly
+                    if (j > 0 ) {
+                        SetLeftRight(i, j);
+                    }
+                    if(i > 0) {
+                        SetUpDown(i, j);
+                    }
+
+                    // Assign room a dirtiness value
+                    currentRoom.dirty = GetRoomCondition();
+                    System.out.println("Room at position (" + i + ", " + j + ") successfully initialized!");
                 }
-
-                // Assign room a dirtiness value
-                currentRoom.dirty = GetRoomCondition();
-                System.out.println("Room " + i + " successfully initialized!");
             }
         }
     }
 
-    // Set Left Right Method
+    // SetLeftRight Method
     // <Description> Assign the current square's left relation to the previous room,
     // and assign that square's right relation to the current square. </Description>
     // <Parameters> int index - specifies index of current square in rooms array </Parameters>
-    private void SetLeftRight(int index)
+    private void SetLeftRight(int x, int y)
     {
-        System.out.println("Setting left and right relationships for room " + index);
-        Square square = rooms[index];
-        square.SetLeft(rooms[index-1]);
-        rooms[index-1].SetRight(square);
+        System.out.println("Setting left and right relationships for room at position (" + x + ", " + y + ")");
+        Square square = rooms[x][y];
+        square.SetLeft(rooms[x][y-1]);
+        rooms[x][y-1].SetRight(square);
     }
 
-    // Set Room Condition
+    // SetUpDown Method
+    // <Description> Assign the current square's up relation to the equvalent column's row in previous row
+    // and assign that square's down relation to the current square. </Description>
+    // <Parameters> int index - specifies index of current square in rooms array </Parameters>
+    private void SetUpDown(int x, int y)
+    {
+        System.out.println("Setting up and down relationships for room at position (" + x + ", " + ")");
+        Square square = rooms[x][y];
+        square.SetUp(rooms[x-1][y]);
+        rooms[x-1][y].SetDown(square);
+    }
+
+    // SetRoomCondition Method
     // <Description> Randomly assign room a value for dirty or clean
     // Boolean value set to true if dirty </Description>
     // <Parameters> None </Parameters>

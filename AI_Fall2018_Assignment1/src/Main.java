@@ -8,10 +8,11 @@ public class Main
 {
     public static void main(String[]args)
     {
-        int roomCount = 5;
+        int x = 2;
+        int y = 2;
         // Initialize environment for program
-        System.out.println("Creating a new environment with " + roomCount + " rooms.");
-        Environment env = new Environment(roomCount);
+        System.out.println("Creating a new environment with " + x + "x" + y + " rooms.");
+        Environment env = new Environment(x, y);
 
         // NOTE: This program is assuming that no square will become dirty after it has been
         // cleaned, so the vacuum will be able to maintain a list of cleaned rooms and report
