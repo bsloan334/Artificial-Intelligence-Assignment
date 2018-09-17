@@ -11,6 +11,7 @@ public class Environment
     private int horizontalCount;
     //private int verticalCount;
     private Square rooms[];
+    private Vacuum vacuum = new Vacuum();
     private Random rand = new Random();
 
     // Boundaries Constructor
@@ -35,10 +36,32 @@ public class Environment
         }
     }*/
 
-    private void Run()
+    public void Run()
     {
-        // Add two equal sized rooms to the environment
+        System.out.println("Running vacuum program...");
+        // Fill the environment with rooms and assign a dirty or clean value
         PopulateEnvironment();
+
+        // Place vacuum in the first room
+        System.out.println("Placing vacuum in first room...");
+        vacuum.room = rooms[0];
+
+        // Try to clean the initial room
+        System.out.println("Start cleaning!");
+        vacuum.Clean();
+
+        // String to hold direction of movement or "finished" if all rooms are clean
+        String state = "";
+
+        // Continually try to move the vacuum while the room is not clean
+        while (!state.equals("finished")) {
+            String direction = vacuum.MoveVacuum();
+            if(direction == "finished"){
+               state = "finished";
+            }
+        }
+        System.out.println("Vacuum cleaned the environment in " + vacuum.GetMoves() +
+                " moves, cleaning " + vacuum.GetCleans() + " rooms!");
     }
 
     // Populate VacuumCleaner.Environment Method
@@ -48,6 +71,7 @@ public class Environment
     // <Parameters> None </Parameters>
     private void PopulateEnvironment()
     {
+        System.out.println("Adding new rooms to environment!");
         rooms = new VacuumCleaner.Square[horizontalCount];
         InitializeRooms();
     }
@@ -64,6 +88,7 @@ public class Environment
         if(rooms.length > 1) {
             for (int i = 0; i < rooms.length; i++) {
                 Square currentRoom = new Square();
+                System.out.println("Room " + i + " created!");
                 rooms[i] = currentRoom;
 
                 // If not in the corner room, set current and previous square accordingly
@@ -73,6 +98,7 @@ public class Environment
 
                 // Assign room a dirtiness value
                 currentRoom.dirty = GetRoomCondition();
+                System.out.println("Room " + i + " successfully initialized!");
             }
         }
     }
@@ -83,6 +109,7 @@ public class Environment
     // <Parameters> int index - specifies index of current square in rooms array </Parameters>
     private void SetLeftRight(int index)
     {
+        System.out.println("Setting left and right relationships for room " + index);
         Square square = rooms[index];
         square.SetLeft(rooms[index-1]);
         rooms[index-1].SetRight(square);
@@ -99,10 +126,12 @@ public class Environment
         // If in upper half [0.5, 1.0), evaluate as one -> set state to dirty
         if(rand.nextInt() < 0.5)
         {
+            System.out.println("This room is clean.");
             return false;
         }
         else
         {
+            System.out.println("This room is dirty.");
             return true;
         }
     }

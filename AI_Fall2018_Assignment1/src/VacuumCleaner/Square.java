@@ -5,6 +5,9 @@
 
 package VacuumCleaner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Square {
 
     public boolean dirty;
@@ -57,5 +60,28 @@ public class Square {
 
     public void SetDown(Square down) {
         this.down = down;
+    }
+
+    public List<Integer> GetAvailableDirections()
+    {
+        List<Integer> options = new ArrayList<>();
+
+        if(this.left != null)
+        {
+            options.add(1);
+        }
+        if(this.up != null)
+        {
+            options.add(2);
+        }
+        if(this.right != null)
+        {
+            options.add(3);
+        }
+        if(this.down != null)
+        {
+            options.add(4);
+        }
+        return options;
     }
 }

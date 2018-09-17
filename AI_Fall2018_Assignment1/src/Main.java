@@ -8,7 +8,14 @@ public class Main
 {
     public static void main(String[]args)
     {
-        Environment env = new Environment(2);
+        int roomCount = 5;
+        // Initialize environment for program
+        System.out.println("Creating a new environment with " + roomCount + " rooms.");
+        Environment env = new Environment(roomCount);
 
+        // NOTE: This program is assuming that no square will become dirty after it has been
+        // cleaned, so the vacuum will be able to maintain a list of cleaned rooms and report
+        // back when it is finished.
+        env.Run();
     }
 }
