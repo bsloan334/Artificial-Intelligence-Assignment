@@ -1,8 +1,13 @@
-package VacuumCleaner;// Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
-// Class: CS4242 - Artificial Intelligence
+// Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
+// KSU ID's (respectively): 000677104, 000153288, 000523935, 000723607
+// Class: CS4242 - Artificial Intelligence Online
 // Assignment: Programming Assignment 1
-// Date: 15 September 2018
+// Due Date: 17 September 2018
+
+package VacuumCleaner;
 import java.util.Random;
+
+
 // VacuumCleaner.Environment class
 // This class is designed to define a new set of bounds, which will determine
 // the world in which the vacuum is capable of operating

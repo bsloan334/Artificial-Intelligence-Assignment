@@ -1,7 +1,8 @@
 // Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
-// Class: CS4242 - Artificial Intelligence
+// KSU ID's (respectively): 000677104, 000153288, 000523935, 000723607
+// Class: CS4242 - Artificial Intelligence Online
 // Assignment: Programming Assignment 1
-// Date: 15 September 2018
+// Due Date: 17 September 2018
 
 package VacuumCleaner;
 

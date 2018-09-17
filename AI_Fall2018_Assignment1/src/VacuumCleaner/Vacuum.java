@@ -1,5 +1,5 @@
 // Authors: Corey Harris, Kindra Hensley, John Jacobs, Bert Sloan
-// KSU ID's (respectively): 000677104, 000153288, , 000723607
+// KSU ID's (respectively): 000677104, 000153288, 000523935, 000723607
 // Class: CS4242 - Artificial Intelligence Online
 // Assignment: Programming Assignment 1
 // Due Date: 17 September 2018
