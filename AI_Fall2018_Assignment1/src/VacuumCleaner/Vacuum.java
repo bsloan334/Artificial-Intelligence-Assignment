@@ -40,8 +40,8 @@ public class Vacuum {
     }
 
     //this will check to see that the room you are trying to go is valid
-    private boolean CheckMove(int room) {
-        switch(room) {
+    private boolean CheckMove(int move) {
+        switch(move) {
             case 1:
                 if(room.GetLeft() != null){
                     SetRoom(room.GetLeft());

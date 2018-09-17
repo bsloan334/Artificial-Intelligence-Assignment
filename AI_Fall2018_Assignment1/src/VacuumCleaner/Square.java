@@ -10,6 +10,15 @@ public class Square {
     public boolean dirty;
     private Square left, up, right, down = null;
 
+    public Square ()
+    {
+        this.left = null;
+        this.up = null;
+        this.right = null;
+        this.down = null;
+        this.dirty = false;
+    }
+
     public Square(Square left, Square up, Square right, Square down, boolean dirty) {
         this.left = left;
         this.up = up;

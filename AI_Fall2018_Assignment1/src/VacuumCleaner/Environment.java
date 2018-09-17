@@ -10,7 +10,7 @@ public class Environment
 {
     private int horizontalCount;
     //private int verticalCount;
-    //private VacuumCleaner.Square rooms[];
+    private Square rooms[];
     private Random rand = new Random();
 
     // Boundaries Constructor
@@ -23,9 +23,6 @@ public class Environment
             horizontalCount = x;
             //verticalCount = y;
         }
-
-        // Add two equal sized rooms to the environment
-        PopulateEnvironment();
     }
 
     /*public Environment(VacuumCleaner.Square array[])
@@ -38,6 +35,12 @@ public class Environment
         }
     }*/
 
+    private void Run()
+    {
+        // Add two equal sized rooms to the environment
+        PopulateEnvironment();
+    }
+
     // Populate VacuumCleaner.Environment Method
     // <Description> This method creates the layout of the environment,
     // by placing two equal-sized areas next to each other, each
@@ -45,7 +48,7 @@ public class Environment
     // <Parameters> None </Parameters>
     private void PopulateEnvironment()
     {
-        //rooms = new VacuumCleaner.Square[horizontalCount];
+        rooms = new VacuumCleaner.Square[horizontalCount];
         InitializeRooms();
     }
 
@@ -58,27 +61,31 @@ public class Environment
     {
         // Iterate over rooms to create new VacuumCleaner.Square object
         // Set for only two rooms currently
-        for (int i = 0; i < 2; i++)
-        {
-            /*VacuumCleaner.Square s = new VacuumCleaner.Square();
-            s.up = false;
-            s.down = false;
-            // Looking at left room
-            if(i == 0)
-            {
-                s.left = false;
-                s.right = true;
+        if(rooms.length > 1) {
+            for (int i = 0; i < rooms.length; i++) {
+                Square currentRoom = new Square();
+                rooms[i] = currentRoom;
+
+                // If not in the corner room, set current and previous square accordingly
+                if(i > 0) {
+                    SetLeftRight(i);
+                }
+
+                // Assign room a dirtiness value
+                currentRoom.dirty = GetRoomCondition();
             }
-            // Looking at right room
-            else if (i == rooms.length - 1)
-            {
-                s.left = true;
-                s.rght = true;
-            }
-            // Assign room a dirtiness value
-            s.isDirty = GetRoomCondition();*/
-            Boolean temp = GetRoomCondition();
         }
+    }
+
+    // Set Left Right Method
+    // <Description> Assign the current square's left relation to the previous room,
+    // and assign that square's right relation to the current square. </Description>
+    // <Parameters> int index - specifies index of current square in rooms array </Parameters>
+    private void SetLeftRight(int index)
+    {
+        Square square = rooms[index];
+        square.SetLeft(rooms[index-1]);
+        rooms[index-1].SetRight(square);
     }
 
     // Set Room Condition
