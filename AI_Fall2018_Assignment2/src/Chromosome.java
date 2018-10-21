@@ -5,6 +5,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Chromosome {
     private int NUM_QUEENS;             // Default size of -> n Queens
@@ -43,7 +44,7 @@ public class Chromosome {
         // Diagonals
         // Indeces represent X or Y value of the diagonal position from target Queen
         int diagX[] = new int[] {-1, 1, -1, 1};
-        int diagY[] = new int[] {-1, 1, 1, -1}
+        int diagY[] = new int[] {-1, 1, 1, -1};
         // Temp variables
         int tempX, tempY;
         // True if diagonal is out of bounds
@@ -53,6 +54,15 @@ public class Chromosome {
 
         ClearBoard(boardConfig);
         FillBoard(boardConfig);
+
+        for (int item : this.queenLayout)
+        {
+            if(Collections.frequency(this.queenLayout, item) > 1)
+            {
+                conflicts++;
+            }
+
+        }
 
         // Check for crashes
         for(int i = 0; i < NUM_QUEENS; i++)
@@ -84,9 +94,9 @@ public class Chromosome {
                         }
                     }
                 }
+                if(outOfBounds == true)
+                    outOfBounds = false;
             }
-            if(outOfBounds == true)
-                outOfBounds = false;
         }
         this.crashes = conflicts;
     }
@@ -106,7 +116,7 @@ public class Chromosome {
     {
         for(int i = 0; i < NUM_QUEENS; i++)
         {
-            target[i][queenLayout.get(i)] = 1;
+            target[i][this.queenLayout.get(i)] = 1;
         }
     }
 
@@ -127,7 +137,7 @@ public class Chromosome {
 
 	public void SetCrashes(int input)
 	{
-		this.cras
+		this.crashes = input;
 	}
 
 	public double GetMatingProbability()
@@ -136,4 +146,14 @@ public class Chromosome {
 	}
 
 	public void SetMatingProbability(double input)
+    {
+        this.matingProbability = input;
+    }
+
+    public void SetQueenPosition(int position, int value)
+    {
+        if(position >= 0 && position < 8) {
+            this.queenLayout.set(position, value);
+        }
+    }
 }
